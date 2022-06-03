@@ -2,10 +2,7 @@ package com.okta.examples.apiamhooks.controller;
 
 import com.okta.examples.apiamhooks.model.Beer;
 import com.okta.examples.apiamhooks.model.Person;
-import com.okta.examples.apiamhooks.model.hooks.IDTokenPatchResponse;
-import com.okta.examples.apiamhooks.model.hooks.TokenHookRequest;
-import com.okta.examples.apiamhooks.model.hooks.TokenHookResponse;
-import com.okta.examples.apiamhooks.model.hooks.TokenPatchResponse;
+import com.okta.examples.apiamhooks.model.hooks.*;
 import com.okta.examples.apiamhooks.repository.PersonRepository;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,15 +28,23 @@ public class HooksController {
         Person person = personRepository.findByEmail(login);
 
         TokenHookResponse response = new TokenHookResponse();
-        if (person != null) {
-            IDTokenPatchResponse idTokenPatchResponse = new IDTokenPatchResponse();
+       // if (person != null) {
+        AccessTokenPatchResponse idTokenPatchResponse  =new AccessTokenPatchResponse();
+          //  IDTokenPatchResponse idTokenPatchResponse = new IDTokenPatchResponse();
             idTokenPatchResponse.getValue().add(
                 new TokenPatchResponse.Value(
-                    "add", "/claims/beers", transformBeers(person.getFavoriteBeers())
+                //   "add", "/claims/beers", transformBeers(person.getFavoriteBeers())
+                     //  "replace","/access/claims/sub",transformBeers(person.getFavoriteBeers())
+
+                       "replace","/claims/sub","yuvi@gmail.com"
+                   //     "replace","/token/lifetime/expiration","3500"
+
+
+
                 )
             );
             response.getCommands().add(idTokenPatchResponse);
-        }
+     //   }
         return response;
     }
 
