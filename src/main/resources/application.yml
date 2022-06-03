@@ -1,0 +1,36 @@
+server:
+  tomcat:
+    remote_ip_header: x-forwarded-for
+    protocol_header: x-forwarded-proto
+    
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+okta:
+  oauth2:
+    issuer: https://dev-38877058.okta.com/oauth2/default
+    clientId: 0oa58bldlh2tQmn0o5d7
+    clientSecret: hjubK2HnAYnb0vtP3_v5dXtmVYtp4poM4aFayxc3
+    audience: api://default
+
+  hooks:
+    id: me@example.com
+    password: whatevs
+    basicAuth: bWVAZXhhbXBsZS5jb206d2hhdGV2cw==
+
+      #ssl:
+      #    key-store: classpath:selfsigned.jks
+       #   key-store-password: changeit
+       #   key-store-type: JKS
+       #   key-alias: tomcat
+        #  key-password: changeit
+        #  port: 8443
